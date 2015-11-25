@@ -18,7 +18,7 @@ public:
    * \param t The current animation time in milliseconds
    * \param t The node which is to be applied after \p t has passed
    */
-  virtual void apply(time_t t, shared_ptr<INode> n) = 0;
+  virtual void apply(time_t t, const INode& n) = 0;
 };
 
 } // namespace Animator

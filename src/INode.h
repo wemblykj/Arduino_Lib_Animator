@@ -4,6 +4,8 @@
 #ifndef _INODE_h
 #define _INODE_h
 
+#include "Common.h"
+
 namespace Animator {
 
 class INode

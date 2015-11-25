@@ -4,11 +4,13 @@
 #ifndef _IPLAYBACKCONTROLLER_h
 #define _IPLAYBACKCONTROLLER_h
 
+#include "IController.h"
+
 #include "Common.h"
 
 namespace Animator {
 
-class IPlaybackController
+class IPlaybackController : virtual public IController
 {
 public:
   virtual void play() = 0;

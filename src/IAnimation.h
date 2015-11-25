@@ -6,8 +6,7 @@
 
 #include "INode.h"
 
-#include <list>
-#include <memory.h>
+#include "Common.h"
 
 using namespace std;
 
@@ -18,12 +17,10 @@ class IStream;
 class IAnimation
 {
 public:
-  typedef list<shared_ptr<IStream>> StreamList
+  typedef IStream* (*StreamList)[];
   
 public:
-  virtual void addStream(const shared_ptr<IStream>& stream) = 0;
-  virtual void removeStream(const shared_ptr<IStream>& stream) = 0;
-  virtual void StreamList getStreams();
+  virtual StreamList getStreams();
 };
 
 } // namespace Animator

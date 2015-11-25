@@ -4,13 +4,13 @@
 #ifndef _ANIMATOR_h
 #define _ANIMATOR_h
 
-#include <memory.h>
-
 using namespace std;
 
 namespace Animator {
 
-class IController;
+class IAnimation;
+class IPlaybackController;
+class IStream;
 
 //! Create an animation stream
 /**
@@ -18,13 +18,13 @@ class IController;
   *
   * \param name A unique name for the stream
   */
-shared_ptr<IStream> createAnimationStream(string name);
+IStream* createStream(const char* name);
 
 //! Create an animation
 /**
   * Note the same animation can be used by one or more animation controllers
   */
-shared_ptr<IAnimation> createAnimation();
+IAnimation* createAnimation(IStream*[]);
 
 //! Create an animation controller with a predefined update resolution
 /**
@@ -34,8 +34,7 @@ shared_ptr<IAnimation> createAnimation();
  * \param applicator The animation resolution to use for the controller
  * \return An IController instance
  */
-shared_ptr<IController> createAnimationController();
-
+IPlaybackController* createPlaybackController(IAnimation* animation);
 
 } // namespace Animator
 

@@ -9,7 +9,10 @@
 namespace Animator {
 
 typedef uint16_t time_t;
-typedef std::pair<time_t, time_t> range_t;
+struct range_t {
+  time_t begin;
+  time_t end;
+};
 
 } // namespace Animator
 

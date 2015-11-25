@@ -4,9 +4,6 @@
 #ifndef _ISTREAM_h
 #define _ISTREAM_h
 
-#include <list>
-#include <memory>
-
 using namespace std;
 
 namespace Animator {
@@ -17,23 +14,23 @@ class IStream
 {
 public:
   //! A list of animation nodes
-  typedef std::list<shared_ptr<INode>> NodeList
+  typedef INode* (*NodeList)[];
   
 public:
   //! A unique name for the stream
-  virtual string name();
+  virtual const char* name();
   
   //! Add a new node to the animation
-  virtual void addNode(time_t time, const shared_ptr<INode> node);
+  //virtual void addNode(time_t time, INode*> node);
   
   //! Remove a node from the animation
-  virtual void removeNode(time_t time, const shared_ptr<INode> node);
+  //virtual void removeNode(time_t time, const INode* node);
   
   //! Get all nodes in the animation
-  virtual NodeList getNodes();
+  virtual NodeList getNodes(size_t& count);
   
   //! Get all nodes within \p range
-  virtual void getNodes(range_t range);
+  //virtual NodeList getNodes(range_t range, size_t& count);
 };
 
 } // namespace Animator

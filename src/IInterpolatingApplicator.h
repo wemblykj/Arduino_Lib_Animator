@@ -4,8 +4,9 @@
 #ifndef _IINTERPOLATINGAPPLICATOR_h
 #define _IINTERPOLATINGAPPLICATOR_h
 
-
 #include "IApplicator.h"
+
+#include "Common.h"
 
 namespace Animator {
 
@@ -16,7 +17,7 @@ public:
   /**
    * \param The elapsed milliseconds since the last update 
    */
-  virtual void apply(time_t t, shared_ptr<INode> n0, shared_ptr<INode> n1) = 0;
+  virtual void apply(time_t t,const INode& n0, const INode& n1) = 0;
 };
 
 } // namespace Animator

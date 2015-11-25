@@ -4,8 +4,6 @@
 #ifndef _ICONTROLLER_h
 #define _ICONTROLLER_h
 
-#include <memory.h>
-
 namespace Animator {
 
 class IAnimation;
@@ -14,14 +12,16 @@ class IPlaybackControls;
 class IController
 {
 public:
+  //! Update the controller for the specified time period \p millis
+  virtual void update(time_t millis);
   //! Get the animation associated with this controller
-  virtual shared_ptr<IAnimation> animation() = 0;
-  //! Get the playback controls for the controller
-  virtual shared_ptr<IPlaybackControls> playbackControls() = 0;
-  //! Specify an applicator for a named animation stream
-  virtual setStreamApplicator(string streamName, shared_ptr<IApplicator> applicator) = 0;
+  virtual IAnimation& animation() = 0;
+  virtual time_t length();
   //! Reset the controller to its initial state
   virtual void reset() = 0;
+  //! Specify an applicator for a named animation stream
+  //virtual setStreamApplicator(string streamName, IApplicator> applicator) = 0;
+  
 };
 
 } // namespace Animator
