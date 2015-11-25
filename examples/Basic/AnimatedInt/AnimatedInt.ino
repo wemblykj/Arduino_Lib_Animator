@@ -1,8 +1,8 @@
 #include <Animator.h>
-#include <IAnimation.h>
-#include <IPlaybackController.h>
-#include <IStream.h>
-#include <Common.h>
+#include <animator/IAnimation.h>
+#include <animator/IPlaybackController.h>
+#include <animator/IStream.h>
+#include <animator/Common.h>
 
 using namespace std;
 using namespace Animator;
