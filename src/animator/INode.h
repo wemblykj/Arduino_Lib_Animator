@@ -12,7 +12,7 @@ class INode
 {
 public:
   //! The node's time of execution
-  virtual time_t time() = 0;
+  virtual time_t time() const = 0;
 };
 
 } // namespace Animator
