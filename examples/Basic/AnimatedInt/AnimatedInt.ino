@@ -2,13 +2,12 @@
 #include <animator/IAnimation.h>
 #include <animator/IPlaybackController.h>
 #include <animator/IStream.h>
+#include <animator/Node.h>
+#include <animator/applicators/Node.h>
 #include <animator/Common.h>
 
 using namespace std;
 using namespace Animator;
-
-IStream* intStream;
-IAnimation* animation;
 
 struct _CONTROLLER {
   _CONTROLLER() 
@@ -26,46 +25,55 @@ struct _CONTROLLER {
 
 static const int numControllers = sizeof(controllers)/sizeof(struct _CONTROLLER);
 
-void updateController(struct _CONTROLLER c)
-{
+uint8_t value1 = 0;
+uint8_t value2 = 0;
+
+IAnimation* createDefaultAnimation {
+  // Animate an uint8_t from 0 -> 255 over 1 second
+  INode* node1 = Node<uint8_t>(0, 0);
+  INode* node2 = Node<uint8_t>(500, 200);
+  INode* node3 = Node<uint8_t>(1000, 255);
+  INode* nodes[] = {node1, node2, node3};
+  
+  IStream* intStream = createStream("int", nodes);
+  IStream* streams[] = {intStream};
+  
+  // Create an animations
+  animation = createAnimation(streams);
+}
+
+void updateController(struct _CONTROLLER c) {
   const time_t time = millis();
-  if (!c.reset)
-  {
+  if (!c.reset) {
     const time_t delta_time = time - c.lastTime;
   
-    if (delta_time >= c.interval)
-    {
+    if (delta_time >= c.interval) {
       c.controller->update(delta_time);
       c.lastTime = time;
     }
-  }
-  else
-  {
+  } else {
     c.controller->update(0);
     c.lastTime = time;
   }
 }
 
 void setup() {
-  intStream = createStream("int");
-  IStream* streams[] = {intStream};
-  
-  // Create an animations
-  animation = createAnimation(streams);
-  
+  IAnimation* animation = createDefaultAnimation();
   auto c1 = createPlaybackController(animation);
   auto c2 = createPlaybackController(animation);
   
-  // Create multiple controllers that share the same animation
+  // Create multiple controllers that share the same animation but use different applicators, the controllers can therefore be driven
+  // independently, e.g. playback speed and position.
   controllers[0].controller = c1;
-  controllers[0].interval = 250;
+  controllers[0].interval = 100;  // uses keyframe applicator for 3 nodes so should only require updating every half-a-second.
   
-  // Seek halfway trhough the animation for 2nd controller and update at half the speed
   controllers[1].controller = c2;
-  controllers[1].interval = 500;
+  controllers[1].interval = 4;    // uses interpolation of 3 nodes over one second, 4ms should allow us to drive all 256 levels
+  
+  c1->addApplicator("intStream", Applicator::Keyframe<uint8_t>(value1));
+  c2->addApplicator("intStream", Applicator::LinearInterpolator<uint8_t>(value2););
   
   c1->play();
-  c2->seek(c2->length()/2);
   c2->play();
 }
 

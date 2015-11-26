@@ -4,7 +4,7 @@ namespace Animator {
 namespace Applicator {
 
 template<typename T_Payload>
-class Keyframe : virtual public IApplicator
+class Keyframe : virtual public IKeyframeApplicator
 {
 public:
   Keyframe(T_Payload& target)

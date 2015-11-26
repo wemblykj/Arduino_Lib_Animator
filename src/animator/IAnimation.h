@@ -20,7 +20,8 @@ public:
   typedef IStream* (*StreamList)[];
   
 public:
-  virtual StreamList getStreams();
+  virtual const StreamList& getStreams() = 0;
+  virtual uint8_t getStreamCount() = 0;
 };
 
 } // namespace Animator

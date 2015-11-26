@@ -34,7 +34,7 @@ IAnimation* createAnimation(IStream*[]);
  * \param applicator The animation resolution to use for the controller
  * \return An IController instance
  */
-IPlaybackController* createPlaybackController(IAnimation* animation);
+IPlaybackController* createPlaybackController(IAnimation* animation, PlaybackFlags pf = Forward);
 
 } // namespace Animator
 
