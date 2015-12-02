@@ -22,8 +22,8 @@ public:
   IAnimation& animation() override;
   PlaybackFlags playbackFlags() const override
   { return mFlags; }
-  time_t length();
-  time_t playbackPosition()
+  time_t length() const override;
+  time_t playbackPosition() const override
   { return mTime; }
   void addStreamApplicator(const char* streamName, const IApplicator* applicator) override;
   void setStreamApplicators(const char* streamName, const ApplicatorList&) override;

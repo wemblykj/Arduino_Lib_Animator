@@ -20,6 +20,8 @@ public:
   typedef ForwardLinkedList<const IApplicator*> ApplicatorList;
   
 public:
+  virtual ~IController() {}
+  
   //! Get the animation associated with this controller
   virtual IAnimation& animation() = 0;
   
@@ -38,7 +40,7 @@ public:
   /**
     *  \return The playback position in milliseconds, this will be between between 0 and length()
     */
-  virtual time_t playbackPosition();
+  virtual time_t playbackPosition() const = 0;
   
   //! Add an applicator to the named stream
   virtual void addStreamApplicator(const char* streamName, const IApplicator* applicator) = 0;

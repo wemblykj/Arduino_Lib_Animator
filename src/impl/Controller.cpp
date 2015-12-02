@@ -15,7 +15,7 @@ namespace Animator {
   IAnimation& Controller::animation()
   {}
   
-  time_t Controller::length()
+  time_t Controller::length() const
   {}
   
   void Controller::addStreamApplicator(const char* streamName, const IApplicator* applicator)
