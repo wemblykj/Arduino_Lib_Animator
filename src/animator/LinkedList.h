@@ -1,8 +1,8 @@
 /* Simple forward and bidirectional linked list implementations
  * Paul Wightmore 2015
  */
-#ifndef _LINKEDLIST_h
-#define _LINKEDLIST_h
+#ifndef _ANIMATOR_LINKEDLIST_h
+#define _ANIMATOR_LINKEDLIST_h
 
 namespace Animator {
 
@@ -171,4 +171,4 @@ class BidirectionalForwardLinkedList : public LinkedList<T_Payload, Bidirectiona
 
 } // namespace Animator
 
-#endif // LINKEDLIST
+#endif // _ANIMATOR_LINKEDLIST_h

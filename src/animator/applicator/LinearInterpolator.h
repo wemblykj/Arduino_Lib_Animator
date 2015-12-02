@@ -2,8 +2,8 @@
  * Paul Wightmore 2015
  */
  
-#ifndef _APPLICATOR_LINEARINTERPOLATOR_h
-#define _APPLICATOR_LINEARINTERPOLATOR_h
+#ifndef _ANIMATOR_APPLICATOR_LINEARINTERPOLATOR_h
+#define _ANIMATOR_APPLICATOR_LINEARINTERPOLATOR_h
 
 #include "animator/IInterpolatingApplicator.h"
 
@@ -46,4 +46,4 @@ private:
 } // namespace Applicators
 } // namespace Animator
 
-#endif // _APPLICATOR_LINEARINTERPOLATOR_h
+#endif // _ANIMATOR_APPLICATOR_LINEARINTERPOLATOR_h

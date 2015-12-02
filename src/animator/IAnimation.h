@@ -1,8 +1,8 @@
 /* IAnimation interface
  * Paul Wightmore 2015
  */
-#ifndef _IANIMATION_h
-#define _IANIMATION_h
+#ifndef _ANIMATOR_IANIMATION_h
+#define _ANIMATOR_IANIMATION_h
 
 #include "animator/INode.h"
 #include "animator/Common.h"
@@ -24,7 +24,7 @@ public:
   virtual const StreamList getStreams() = 0;
   
   //! Add a stream to the animation
-  virtual void addStream(const IStream* applicator) = 0;
+  virtual void addStream(const IStream* stream) = 0;
   
   //! Add a list of streams to the animation
   /**
@@ -38,4 +38,4 @@ public:
 
 } // namespace Animator
 
-#endif // _IANIMATION_h
+#endif // _ANIMATOR_IANIMATION_h

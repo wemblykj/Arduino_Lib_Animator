@@ -2,8 +2,8 @@
  * Paul Wightmore 2015
  */
  
-#ifndef _APPLICATOR_KEYFRAME_h
-#define _APPLICATOR_KEYFRAME_h
+#ifndef _ANIMATOR_APPLICATOR_KEYFRAME_h
+#define _ANIMATOR_APPLICATOR_KEYFRAME_h
 
 #include "animator/IKeyframeApplicator.h"
 
@@ -33,4 +33,4 @@ private:
 } // namespace Applicators
 } // namespace Animator
 
-#endif // _APPLICATOR_KEYFRAME_h
+#endif // _ANIMATOR_APPLICATOR_KEYFRAME_h

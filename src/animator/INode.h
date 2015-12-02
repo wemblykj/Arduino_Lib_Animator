@@ -1,8 +1,8 @@
 /* INode interface
  * Paul Wightmore 2015
  */
-#ifndef _INODE_h
-#define _INODE_h
+#ifndef _ANIMATOR_INODE_h
+#define _ANIMATOR_INODE_h
 
 #include "Common.h"
 
@@ -19,4 +19,4 @@ public:
 
 } // namespace Animator
 
-#endif // _INODE_h
+#endif // _ANIMATOR_INODE_h

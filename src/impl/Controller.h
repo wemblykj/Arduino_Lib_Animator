@@ -1,8 +1,8 @@
 /* IController interface
  * Paul Wightmore 2015
  */
-#ifndef _CONTROLLER_h
-#define _CONTROLLER_h
+#ifndef _ANIMATOR_CONTROLLER_h
+#define _ANIMATOR_CONTROLLER_h
 
 #include "../animator/IController.h"
 #include "../animator/IStream.h"
@@ -11,7 +11,7 @@
 
 namespace Animator {
 
-class Controller : virtual public IController{
+class Controller : virtual public IController {
 public:
   Controller(IAnimation* animation, PlaybackFlags pf = Forward);
     
@@ -22,9 +22,13 @@ public:
   IAnimation& animation() override;
   PlaybackFlags playbackFlags() const override
   { return mFlags; }
+  void setPlaybackFlags(PlaybackFlags pf = Forward) override
+  { mFlags = pf; }
   time_t length() const override;
   time_t playbackPosition() const override
   { return mTime; }
+  void setPlaybackPosition(time_t time) override
+  { mTime = time; }
   void addStreamApplicator(const char* streamName, const IApplicator* applicator) override;
   void setStreamApplicators(const char* streamName, const ApplicatorList&) override;
   const char* removeStreamApplicator(const IApplicator* applicator) override;
@@ -54,4 +58,4 @@ private:
 
 } // namespace Animator
 
-#endif // _CONTROLLER_h
+#endif // _ANIMATOR_CONTROLLER_h

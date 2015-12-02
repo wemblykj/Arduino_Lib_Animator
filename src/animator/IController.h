@@ -1,8 +1,8 @@
 /* IController interface
  * Paul Wightmore 2015
  */
-#ifndef _ICONTROLLER_h
-#define _ICONTROLLER_h
+#ifndef _ANIMATOR_ICONTROLLER_h
+#define _ANIMATOR_ICONTROLLER_h
 
 #include "animator/Common.h"
 #include "animator/LinkedList.h"
@@ -28,6 +28,9 @@ public:
   //! Return the active playback flags
   virtual PlaybackFlags playbackFlags() const = 0;
   
+  //! Set the active playback flags
+  virtual void setPlaybackFlags(PlaybackFlags pf = Forward) = 0;
+  
   //! The length of the animation
   /**  The length of the animation in milliseconds between the first node ande the last
     *  the length takes into consideration the playback speed and so may vary from that calculated by another controller
@@ -41,6 +44,9 @@ public:
     *  \return The playback position in milliseconds, this will be between between 0 and length()
     */
   virtual time_t playbackPosition() const = 0;
+  
+  //! Set the playback position
+  virtual void setPlaybackPosition(time_t time) = 0;
   
   //! Add an applicator to the named stream
   virtual void addStreamApplicator(const char* streamName, const IApplicator* applicator) = 0;
@@ -72,4 +78,4 @@ public:
 
 } // namespace Animator
 
-#endif // _ICONTROLLER_h
+#endif // _ANIMATOR_ICONTROLLER_h

@@ -1,15 +1,18 @@
 #include "../Animator.h"
 
+#include "Animation.h"
 #include "Controller.h"
+#include "PlaybackController.h"
+#include "Stream.h"
 
 #include "../animator/IStream.h"
 #include "../animator/IAnimation.h"
 
 namespace Animator {
 
-IStream* createStream(const char* name, const IStream::NodeList&)
+IStream* createStream(const char* name, const IStream::NodeList& nodes)
 {
-  return nullptr;
+  return new Stream(name, nodes);
 }
 
 IStream* createStream(const char* name, const INode* (*nodes), size_t count)
@@ -21,9 +24,9 @@ IStream* createStream(const char* name, const INode* (*nodes), size_t count)
   return createStream(name, nl);
 }
 
-IAnimation* createAnimation(const IAnimation::StreamList&)
+IAnimation* createAnimation(const IAnimation::StreamList& streams)
 {
-  return nullptr;
+  return new Animation(streams);
 }
 
 IAnimation* createAnimation(const IStream* (*streams), size_t count)
@@ -35,9 +38,14 @@ IAnimation* createAnimation(const IStream* (*streams), size_t count)
   return createAnimation(sl);
 }
 
-IPlaybackController* createPlaybackController(IAnimation* animation, PlaybackFlags pf)
+IController* createController(IAnimation* animation, PlaybackFlags pf)
 {
   return new Controller(animation, pf);
+}
+
+IPlaybackController* createPlaybackController(IAnimation* animation, PlaybackFlags pf)
+{
+  return new PlaybackController(animation, pf);
 }
 
 } // namespace Animator
