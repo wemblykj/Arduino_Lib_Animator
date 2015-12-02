@@ -6,6 +6,7 @@
 #include <animator/Node.h>
 #include <animator/applicator/Keyframe.h>
 #include <animator/applicator/LinearInterpolator.h>
+#include <animator/applicator/Policies.h>
 #include <animator/Common.h>
 
 using namespace std;
@@ -72,8 +73,8 @@ void setup() {
   controllers[1].controller = c2;
   controllers[1].interval = 4;    // uses interpolation of 3 nodes over one second, 4ms should allow us to drive all 256 levels
   
-  c1->addStreamApplicator("intStream", new Applicators::Keyframe<uint8_t>(value1));
-  c2->addStreamApplicator("intStream", new Applicators::LinearInterpolator<uint8_t>(value2));
+  c1->addStreamApplicator("intStream", new Applicators::Keyframe<uint8_t, Applicator::AssignmentPolicy>(value1));
+  c2->addStreamApplicator("intStream", new Applicators::LinearInterpolator<uint8_t, Applicator::AssignmentPolicy>(value2));
   
   c1->play();
   c2->play();
