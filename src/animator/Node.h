@@ -1,22 +1,36 @@
-#include "../INode.h"
+/* Node
+ * Paul Wightmore 2015
+ */
+#ifndef _NODE_h
+#define _NODE_h
 
-#include "../Common.h"
+#include "animator/INode.h"
 
-template<T_Payload>
+#include "animator/Common.h"
+
+namespace Animator {
+
+template<typename T_Payload>
 class Node : virtual public INode
 {
 public:
-  Node(time_t, const T_Payload value)
+  Node(const time_t time, const T_Payload value)
     : mTime(time)
     , mValue(value)
   {}
 
-  const T_Payload value() const;
-
+  const T_Payload& value() const
+  { return mValue; }
+  
   // implement INode
-  time_t time() const override;
+  time_t time() const override
+  { return mTime; }
 
 private:
-  time_t mTime;
+  const time_t mTime;
   const T_Payload mValue;
 };
+
+} // namespace Animator
+
+#endif // _NODE_h

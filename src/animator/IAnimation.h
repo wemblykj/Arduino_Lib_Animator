@@ -4,9 +4,9 @@
 #ifndef _IANIMATION_h
 #define _IANIMATION_h
 
-#include "INode.h"
-
-#include "Common.h"
+#include "animator/INode.h"
+#include "animator/Common.h"
+#include "animator/LinkedList.h"
 
 using namespace std;
 
@@ -17,11 +17,23 @@ class IStream;
 class IAnimation
 {
 public:
-  typedef IStream* (*StreamList)[];
+  typedef ForwardLinkedList<const IStream*> StreamList;
   
 public:
-  virtual const StreamList& getStreams() = 0;
-  virtual uint8_t getStreamCount() = 0;
+  //! Get a list of streams for the animation
+  virtual const StreamList getStreams() = 0;
+  
+  //! Add a stream to the animation
+  virtual void addStream(const IStream* applicator) = 0;
+  
+  //! Add a list of streams to the animation
+  /**
+    * this will destroy all existing streams
+    */
+  virtual void setStreams(const StreamList&) = 0;
+  
+  //! Remove \p stream from the animation
+  virtual void removeStream(const IStream* stream) = 0;
 };
 
 } // namespace Animator

@@ -1,5 +1,7 @@
 #include "Controller.h"
 
+#include "../animator/Common.h"
+
 namespace Animator {
 
   Controller::Controller(IAnimation* animation, PlaybackFlags pf)
@@ -8,13 +10,6 @@ namespace Animator {
     , mFlags(pf)
   {
     assert(mAnimation);
-    
-    // Build a data structure of streams and their monitored nodes
-    const auto count = mAnimation->getStreamCount();
-    const auto& streams = mAnimation->getStreams();
-    for (int i = 0; i < count; ++i) {
-      streams[i]->
-    }
   }
   
   IAnimation& Controller::animation()
@@ -23,30 +18,62 @@ namespace Animator {
   time_t Controller::length()
   {}
   
-  ApplicatorList Controller::streamApplicators(const char* streamName)
-  {}
+  void Controller::addStreamApplicator(const char* streamName, const IApplicator* applicator)
+  {
+    auto context = getStreamContext(streamName);
+    context->applicators.push_back(applicator);
+  }
   
-  void Controller::addStreamApplicator(const char* streamName, IApplicator* applicator)
-  {}
+  void Controller::setStreamApplicators(const char* streamName, const ApplicatorList& applicators)
+  {
+    auto context = getStreamContext(streamName);
+    context->applicators = applicators;
+  }
   
-  void Controller::addStreamApplicators(const char* streamName, ApplicatorList)
-  {}
+  const char* Controller::removeStreamApplicator(const IApplicator* applicator)
+  {
+    auto n = mStreamContextList.head();
+    while (n != nullptr)
+    {
+      if (n->payload->applicators.remove(applicator))
+        return n->payload->name;
+    }
+    
+    return nullptr;
+  }
   
-  const char* Controller::removeStreamApplicator(IApplicator* applicator)
-  {}
-  
-  ApplicatorList Controller::removeStreamApplicators(const char* streamName)
-  {}
+  IController::ApplicatorList Controller::removeStreamApplicators(const char* streamName)
+  {
+    auto context = getStreamContext(streamName);
+    auto applicators = context->applicators;
+    context->applicators = ApplicatorList();
+    return applicators;
+  }
   
   void Controller::update(time_t deltaTime)
   {
     mTime += deltaTime;
-    
-    
-    
   }
   
   void Controller::reset()
-  {}
+  {
+    mTime = 0;
+  }
 
+  struct Controller::StreamContext* Controller::getStreamContext(const char* streamName)
+  {
+    assert(streamName);
+    
+    auto n = mStreamContextList.head();
+    while (n != nullptr)
+    {
+      if (0 == strcmp(streamName, n->payload->name))
+        return n->payload;
+    }
+    
+    auto sc = new StreamContext(streamName);
+    mStreamContextList.push_back(sc);
+    return sc;
+  }
+  
 } // namespace Animator

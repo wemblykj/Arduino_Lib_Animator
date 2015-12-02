@@ -1,4 +1,4 @@
-/* InterpolatingApplicator interface
+/* Interpolating applicator interface
  * Paul Wightmore 2015
  */
 #ifndef _IINTERPOLATINGAPPLICATOR_h

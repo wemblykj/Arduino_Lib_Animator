@@ -5,6 +5,7 @@
 #define _CONTROLLER_h
 
 #include "../animator/IController.h"
+#include "../animator/IStream.h"
 
 #include "../animator/Common.h"
 
@@ -24,30 +25,33 @@ public:
   time_t length();
   time_t playbackPosition()
   { return mTime; }
-  ApplicatorList streamApplicators(const char* streamName) override;
-  void addStreamApplicator(const char* streamName, IApplicator* applicator) override;
-  void addStreamApplicators(const char* streamName, ApplicatorList) override;
-  const char* removeStreamApplicator(IApplicator* applicator) override;
+  void addStreamApplicator(const char* streamName, const IApplicator* applicator) override;
+  void setStreamApplicators(const char* streamName, const ApplicatorList&) override;
+  const char* removeStreamApplicator(const IApplicator* applicator) override;
   ApplicatorList removeStreamApplicators(const char* streamName) override;
   void update(time_t deltaTime) override;
   void reset() override;
   
-private:
-  struct _STREAM {
-    _STREAM(const char* _name, const NodeList& _nodes, uint8_t _nodeCount) 
+protected:
+  struct StreamContext {
+    StreamContext(const char* _name) 
       : name(_name)
-      , nodes(_nodes)
-      , nodeCount(_nodeCount)
-      , currentNode(0)
+      , currentNode(nullptr)
     {}
     const char* name;
-    const NodeList& nodes;
-    const uint8_t nodeCount;
-    uint8_t currentNode;
-  }
+    ForwardLinkedList<const INode*>::node_t* currentNode;
+    ForwardLinkedList<const IApplicator*> applicators;
+  };
+  
+  struct StreamContext* getStreamContext(const char* streamName);
+  
+private:
+  ForwardLinkedList<struct StreamContext*> mStreamContextList;
   time_t mTime;
   IAnimation* mAnimation;
   PlaybackFlags mFlags;
 };
 
 } // namespace Animator
+
+#endif // _CONTROLLER_h

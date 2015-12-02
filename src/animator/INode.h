@@ -11,6 +11,8 @@ namespace Animator {
 class INode
 {
 public:
+  virtual ~INode() {};
+  
   //! The node's time of execution
   virtual time_t time() const = 0;
 };

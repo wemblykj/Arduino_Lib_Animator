@@ -1,9 +1,11 @@
 #include <Animator.h>
 #include <animator/IAnimation.h>
+#include <animator/INode.h>
 #include <animator/IPlaybackController.h>
 #include <animator/IStream.h>
 #include <animator/Node.h>
-#include <animator/applicators/Node.h>
+#include <animator/applicator/Keyframe.h>
+#include <animator/applicator/LinearInterpolator.h>
 #include <animator/Common.h>
 
 using namespace std;
@@ -28,18 +30,18 @@ static const int numControllers = sizeof(controllers)/sizeof(struct _CONTROLLER)
 uint8_t value1 = 0;
 uint8_t value2 = 0;
 
-IAnimation* createDefaultAnimation {
+IAnimation* createDefaultAnimation() {
   // Animate an uint8_t from 0 -> 255 over 1 second
-  INode* node1 = Node<uint8_t>(0, 0);
-  INode* node2 = Node<uint8_t>(500, 200);
-  INode* node3 = Node<uint8_t>(1000, 255);
-  INode* nodes[] = {node1, node2, node3};
+  INode* node1 = new Node<uint8_t>(0, 0);
+  INode* node2 = new Node<uint8_t>(500, 200);
+  INode* node3 = new Node<uint8_t>(1000, 255);
+  const INode* nodes[] = {node1, node2, node3};
   
-  IStream* intStream = createStream("int", nodes);
-  IStream* streams[] = {intStream};
+  IStream* intStream = createStream("int", nodes, sizeof(nodes)/sizeof(INode*));
+  const IStream* streams[] = {intStream};
   
   // Create an animations
-  animation = createAnimation(streams);
+  return createAnimation(streams, sizeof(streams)/sizeof(IStream*));
 }
 
 void updateController(struct _CONTROLLER c) {
@@ -70,8 +72,8 @@ void setup() {
   controllers[1].controller = c2;
   controllers[1].interval = 4;    // uses interpolation of 3 nodes over one second, 4ms should allow us to drive all 256 levels
   
-  c1->addApplicator("intStream", Applicator::Keyframe<uint8_t>(value1));
-  c2->addApplicator("intStream", Applicator::LinearInterpolator<uint8_t>(value2););
+  c1->addStreamApplicator("intStream", new Applicators::Keyframe<uint8_t>(value1));
+  c2->addStreamApplicator("intStream", new Applicators::LinearInterpolator<uint8_t>(value2));
   
   c1->play();
   c2->play();
