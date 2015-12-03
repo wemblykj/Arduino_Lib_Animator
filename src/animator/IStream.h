@@ -20,6 +20,9 @@ public:
   //! A unique name for the stream
   virtual const char* name();
   
+  //! The length of the animation for this stream from 0 until the last node
+  virtual time_t length();
+  
   //! Get all nodes in the animation
   virtual const NodeList getNodes();
   

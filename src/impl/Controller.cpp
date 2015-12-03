@@ -16,7 +16,14 @@ namespace Animator {
   {}
   
   time_t Controller::length() const
-  {}
+  {
+    time_t length = 0;
+    auto n = mStreamContextList.head();
+    while (n != nullptr)
+      length = max(length, n->payload->length())
+      
+    return length;
+  }
   
   void Controller::addStreamApplicator(const char* streamName, const IApplicator* applicator)
   {
