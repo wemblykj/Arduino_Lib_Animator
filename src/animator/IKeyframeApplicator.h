@@ -1,8 +1,8 @@
 /* IKeyframeApplicator interface
  * Paul Wightmore 2015
  */
-#ifndef _IKEYFRAMEAPPLICATOR_h
-#define _IKEYFRAMEAPPLICATOR_h
+#ifndef _ANIMATOR_IKEYFRAMEAPPLICATOR_h
+#define _ANIMATOR_IKEYFRAMEAPPLICATOR_h
 
 #include "IApplicator.h"
 
@@ -23,4 +23,4 @@ public:
 
 } // namespace Animator
 
-#endif // _IKEYFRAMEAPPLICATOR_h
+#endif // _ANIMATOR_IKEYFRAMEAPPLICATOR_h

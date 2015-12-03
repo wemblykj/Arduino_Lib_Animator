@@ -1,8 +1,8 @@
 /* IStream interface
  * Paul Wightmore 2015
  */
-#ifndef _ISTREAM_h
-#define _ISTREAM_h
+#ifndef _ANIMATOR_ISTREAM_h
+#define _ANIMATOR_ISTREAM_h
 
 using namespace std;
 
@@ -34,10 +34,8 @@ public:
   
   //! Remove a node from the animation
   virtual void removeNode(time_t time, const INode* node);
-  
-  
 };
 
 } // namespace Animator
 
-#endif // _ISTREAM_h
+#endif // _ANIMATOR_ISTREAM_h

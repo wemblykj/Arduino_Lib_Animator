@@ -1,8 +1,8 @@
 /* IApplicator interface
  * Paul Wightmore 2015
  */
-#ifndef _IAPPLICATOR_h
-#define _IAPPLICATOR_h
+#ifndef _ANIMATOR_IAPPLICATOR_h
+#define _ANIMATOR_IAPPLICATOR_h
 
 namespace Animator {
 
@@ -13,4 +13,4 @@ class IApplicator
 
 } // namespace Animator
 
-#endif // _IAPPLICATOR_h
+#endif // _ANIMATOR_IAPPLICATOR_h

@@ -1,8 +1,8 @@
 /* Interpolating applicator interface
  * Paul Wightmore 2015
  */
-#ifndef _IINTERPOLATINGAPPLICATOR_h
-#define _IINTERPOLATINGAPPLICATOR_h
+#ifndef _ANIMATOR_IINTERPOLATINGAPPLICATOR_h
+#define _ANIMATOR_IINTERPOLATINGAPPLICATOR_h
 
 #include "IApplicator.h"
 
@@ -22,4 +22,4 @@ public:
 
 } // namespace Animator
 
-#endif // _IINTERPOLATINGAPPLICATOR_h
+#endif // _ANIMATOR_IINTERPOLATINGAPPLICATOR_h

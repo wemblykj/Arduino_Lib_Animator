@@ -5,13 +5,13 @@
 #define _ANIMATOR_h
 
 #include "animator/IAnimation.h"
-#include "animator/IController.h"
 #include "animator/IStream.h"
 
 using namespace std;
 
 namespace Animator {
 
+class IController;
 class INode;
 class IPlaybackController;
 

@@ -1,8 +1,8 @@
 /* Node
  * Paul Wightmore 2015
  */
-#ifndef _NODE_h
-#define _NODE_h
+#ifndef _ANIMATOR_NODE_h
+#define _ANIMATOR_NODE_h
 
 #include "animator/INode.h"
 
@@ -33,4 +33,4 @@ private:
 
 } // namespace Animator
 
-#endif // _NODE_h
+#endif // _ANIMATOR_NODE_h

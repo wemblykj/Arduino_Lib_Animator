@@ -1,8 +1,8 @@
 /* Common
  * Paul Wightmore 2015
  */
-#ifndef _COMMON_h
-#define _COMMON_h
+#ifndef _ANIMATOR_COMMON_h
+#define _ANIMATOR_COMMON_h
 
 #define __ASSERT_USE_STDERR
 #include <assert.h>
@@ -42,4 +42,4 @@ inline void __assert(const char *__func, const char *__file, int __lineno, const
 
 } // namespace Animator
 
-#endif // _COMMON_h
+#endif // _ANIMATOR_COMMON_h
