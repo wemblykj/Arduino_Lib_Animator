@@ -1,6 +1,7 @@
 #include "Controller.h"
 
 #include "../animator/Common.h"
+#include "../animator/IAnimation.h"
 
 namespace Animator {
 
@@ -18,9 +19,9 @@ namespace Animator {
   time_t Controller::length() const
   {
     time_t length = 0;
-    auto n = mStreamContextList.head();
+    auto n = mAnimation->getStreams().head();
     while (n != nullptr)
-      length = max(length, n->payload->length())
+      length = max(length, n->payload->length());
       
     return length;
   }

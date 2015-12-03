@@ -14,14 +14,14 @@ class IStream
 {
 public:
   //! A list of animation nodes
-  typedef ForwardLinkedList<const INode*> NodeList;
+  typedef BidirectionalLinkedList<const INode*> NodeList;
   
 public:
   //! A unique name for the stream
-  virtual const char* name();
+  virtual const char* name() const;
   
   //! The length of the animation for this stream from 0 until the last node
-  virtual time_t length();
+  virtual const time_t length() const;
   
   //! Get all nodes in the animation
   virtual const NodeList getNodes();

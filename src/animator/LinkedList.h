@@ -20,7 +20,9 @@ public:
   {}
   
   node_t* head() { return mHead; }
+  const node_t* head() const { return mHead; }
   node_t* tail() { return mTail; }
+  const node_t* tail() const { return mTail; }
   
   T_Payload pop() {
     if (!mHead)
@@ -36,7 +38,7 @@ public:
       mHead = LinkingPolicy<T_Payload>::insertNodeBefore(p, mHead);
   }
   
-  size_t size() {
+  size_t size() const {
     size_t count = 0;
     auto n = mHead;
     while(n) {
@@ -88,7 +90,7 @@ protected:
 template<typename T_Payload>
 struct ForwardPolicy {
   struct ForwardNode {
-      ForwardNode(T_Payload _payload, ForwardNode* _next = nullptr)
+      ForwardNode(T_Payload _payload, struct ForwardNode* _next = nullptr)
         : payload(_payload)
         , next(_next)
       {}
@@ -126,8 +128,9 @@ struct ForwardPolicy {
 template<typename T_Payload>
 struct BidirectionalPolicy {
   struct BidirectionalNode {
-      BidirectionalNode(T_Payload _payload, BidirectionalNode* _next = nullptr)
+      BidirectionalNode(T_Payload _payload, struct BidirectionalNode* _prev = nullptr, struct BidirectionalNode* _next = nullptr)
         : payload(_payload)
+        , prev(_prev)
         , next(_next)
       {}
       
@@ -167,7 +170,7 @@ template<typename T_Payload>
 class ForwardLinkedList : public LinkedList<T_Payload, ForwardPolicy> {};
 
 template<typename T_Payload>
-class BidirectionalForwardLinkedList : public LinkedList<T_Payload, BidirectionalPolicy> {};
+class BidirectionalLinkedList : public LinkedList<T_Payload, BidirectionalPolicy> {};
 
 } // namespace Animator
 
