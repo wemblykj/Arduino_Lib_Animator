@@ -96,8 +96,8 @@ struct ForwardPolicy {
       {}
       
       T_Payload* operator->() const { return &payload; }
+	  T_Payload payload;
       struct ForwardNode* next;
-      T_Payload payload;
   };
   
   typedef ForwardNode node_t;
