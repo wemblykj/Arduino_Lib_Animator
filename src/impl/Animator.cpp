@@ -17,7 +17,7 @@ IAnimation* createAnimation(const IAnimation::StreamList& streams)
 IAnimation* createAnimation(const IStream* (*streams), size_t count)
 {
   IAnimation::StreamList sl;
-  for (int i = 0; i < count; ++i)
+  for (size_t i = 0; i < count; ++i)
     sl.push_back(streams[i]);
     
   return createAnimation(sl);

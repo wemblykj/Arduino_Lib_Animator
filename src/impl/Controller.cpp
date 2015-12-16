@@ -14,7 +14,9 @@ namespace Animator {
   }
   
   IAnimation& Controller::animation()
-  {}
+  {
+	  return *mAnimation;
+  }
   
   time_t Controller::length() const
   {
