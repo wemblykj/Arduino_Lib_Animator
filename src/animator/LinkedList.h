@@ -58,7 +58,7 @@ public:
     }
   }
   
-  bool remove(const T_Payload p) {
+  bool remove(T_Payload p) {
     if (!mHead)
       return false;
     
@@ -95,7 +95,8 @@ struct ForwardPolicy {
         , next(_next)
       {}
       
-      T_Payload* operator->() const { return &payload; }
+	  // TODO: Improve accessing the payload
+      //T_Payload* operator->() const { return &payload; }
 	  T_Payload payload;
       struct ForwardNode* next;
   };

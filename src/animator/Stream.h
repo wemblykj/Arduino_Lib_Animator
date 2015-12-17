@@ -25,19 +25,14 @@ public:
   typedef ForwardLinkedList<const node_t*> NodeList;
   
 public:
-  Stream(const char* name, const NodeList& nodes)
+  Stream(const String& name, const NodeList& nodes)
+	: mName(name)
   {
     auto n = nodes.head();
     while (n) {
       mNodes.push_back(n->payload);
       n = n->next;
     }
-    
-    size_t len = strlen(name);
-    auto nameBuf = new char[len+1];
-    memcpy(nameBuf, 0, len);
-    strcpy(nameBuf, name);
-    mName = nameBuf;
   }
   
   //! Create a concrete node that is compatible with this stream
@@ -46,7 +41,7 @@ public:
   }
   
   // Implement IStream interface
-  const char* name() const override {
+  String name() const override {
     return mName; }
   
   const time_t length() const override {
@@ -56,11 +51,17 @@ public:
     return 0;
   }
   
-  const IStream::NodeList getNodes() override {
+  IStream::NodeList getNodes() override {
     return mNodes; }
   
-  const IStream::NodeList getNodes(range_t range) override {
+  const IStream::NodeList getNodes() const override {
+	return mNodes; }
+  
+  IStream::NodeList getNodes(range_t range) override {
     return IStream::NodeList(); }
+	
+  const IStream::NodeList getNodes(range_t range) const override {
+	return IStream::NodeList(); }
   
   void addNode(time_t time, const INode* node) override {
     mNodes.push_back(node); }
@@ -69,7 +70,7 @@ public:
     mNodes.remove(node); }
   
 private:
-  const char* mName;
+  String mName;
   IStream::NodeList mNodes;
 };
 

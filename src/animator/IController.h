@@ -17,7 +17,7 @@ class IController
 {
 public:
   //! A list of animation nodes
-  typedef ForwardLinkedList<const IApplicator*> ApplicatorList;
+  typedef ForwardLinkedList<IApplicator*> ApplicatorList;
   
 public:
   virtual ~IController() {}
@@ -49,22 +49,22 @@ public:
   virtual void setPlaybackPosition(time_t time) = 0;
   
   //! Add an applicator to the named stream
-  virtual void addStreamApplicator(const char* streamName, const IApplicator* applicator) = 0;
+  virtual void addStreamApplicator(const String& streamName, IApplicator* applicator) = 0;
   
   //! Set a list of applicators for the named animation stream
   /**
     * this will destroy all existing applicators for the named stream
     */
-  virtual void setStreamApplicators(const char* streamName, const ApplicatorList&) = 0;
+  virtual void setStreamApplicators(const String& streamName, const ApplicatorList&) = 0;
   
   //! Remove \p applicator from the stream it is associated with
   /**
     * \return The name of the stream the applicator was associated with
     */
-  virtual const char* removeStreamApplicator(const IApplicator* applicator) = 0;
+  virtual String removeStreamApplicator(IApplicator* applicator) = 0;
   
   //! Remove all applicators for the named animation stream
-  virtual ApplicatorList removeStreamApplicators(const char* streamName) = 0;
+  virtual ApplicatorList removeStreamApplicators(const String& streamName) = 0;
   
   //! Update the controller for the specified time period \p deltaTime
   virtual void update(time_t deltaTime) = 0;

@@ -11,6 +11,7 @@ namespace Animator {
 //! An abstract interface for an aplicator of animation nodes to a target component
 class IApplicator
 {
+public:
   //! Apply an animation keyframe node to a component
   /**
    * Note that there may be a time difference between the designated time of \p n and time \p t

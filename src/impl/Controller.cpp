@@ -1,7 +1,10 @@
 #include "Controller.h"
 
-#include "../animator/Common.h"
-#include "../animator/IAnimation.h"
+#include "animator/Common.h"
+#include "animator/IAnimation.h"
+#include "animator/IApplicator.h"
+
+#include <Arduino.h>
 
 namespace Animator {
 
@@ -28,19 +31,19 @@ namespace Animator {
     return length;
   }
   
-  void Controller::addStreamApplicator(const char* streamName, const IApplicator* applicator)
+  void Controller::addStreamApplicator(const String& streamName, IApplicator* applicator)
   {
     auto context = getStreamContext(streamName);
     context->applicators.push_back(applicator);
   }
   
-  void Controller::setStreamApplicators(const char* streamName, const ApplicatorList& applicators)
+  void Controller::setStreamApplicators(const String& streamName, const ApplicatorList& applicators)
   {
     auto context = getStreamContext(streamName);
     context->applicators = applicators;
   }
   
-  const char* Controller::removeStreamApplicator(const IApplicator* applicator)
+  String Controller::removeStreamApplicator(IApplicator* applicator)
   {
     auto n = mStreamContextList.head();
     while (n != nullptr)
@@ -49,10 +52,10 @@ namespace Animator {
         return n->payload->name;
     }
     
-    return nullptr;
+    return String();
   }
   
-  IController::ApplicatorList Controller::removeStreamApplicators(const char* streamName)
+  IController::ApplicatorList Controller::removeStreamApplicators(const String& streamName)
   {
     auto context = getStreamContext(streamName);
     auto applicators = context->applicators;
@@ -62,22 +65,62 @@ namespace Animator {
   
   void Controller::update(time_t deltaTime)
   {
-    mTime += deltaTime;
+	mTime += deltaTime;
+	
+	auto n = mStreamContextList.head();
+	while (n != nullptr)
+	{
+		auto context = n->payload;
+		
+		if (! context->currentNode) {
+			auto stream = mAnimation->getStreams().head();
+			while (stream != nullptr)
+			{
+				if (stream->payload->name() == context->name) {
+					context->currentNode = stream->payload->getNodes().head();
+					break;
+				}
+				stream =stream->next;
+			}
+		}
+			
+		if (context->currentNode && mTime >= context->currentNode->payload->time()) {
+			if (context->currentNode->next && mTime >= context->currentNode->next->payload->time())
+				context->currentNode = context->currentNode->next;
+				
+			// Update applicators
+			auto a = context->applicators.head();
+			while (a != nullptr)
+			{
+				a->payload->apply(mTime, *(context->currentNode));
+				a = a->next;
+			}
+		}
+		
+		n = n->next;
+	}
   }
   
   void Controller::reset()
   {
     mTime = 0;
+	
+	auto n = mStreamContextList.head();
+	while (n != nullptr)
+	{
+		auto context = n->payload;
+		context->currentNode = nullptr;
+	}
   }
 
-  struct Controller::StreamContext* Controller::getStreamContext(const char* streamName)
+  struct Controller::StreamContext* Controller::getStreamContext(const String& streamName)
   {
     assert(streamName);
     
     auto n = mStreamContextList.head();
     while (n != nullptr)
     {
-      if (0 == strcmp(streamName, n->payload->name))
+      if (n->payload->name == streamName)
         return n->payload;
     }
     

@@ -18,16 +18,22 @@ public:
   
 public:
   //! A unique name for the stream
-  virtual const char* name() const;
+  virtual String name() const;
   
   //! The length of the animation for this stream from 0 until the last node
   virtual const time_t length() const;
   
   //! Get all nodes in the animation
-  virtual const NodeList getNodes();
+  virtual NodeList getNodes();
   
+  //! Get all nodes in the animation
+  virtual const NodeList getNodes() const;
+ 
   //! Get all nodes within \p range
-  virtual const NodeList getNodes(range_t range);
+  virtual NodeList getNodes(range_t range);
+    
+  //! Get all nodes within \p range
+  virtual const NodeList getNodes(range_t range) const;
   
   //! Add a new node to the animation
   virtual void addNode(time_t time, const INode* node);

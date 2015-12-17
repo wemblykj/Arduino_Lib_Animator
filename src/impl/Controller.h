@@ -29,25 +29,25 @@ public:
   { return mTime; }
   void setPlaybackPosition(time_t time) override
   { mTime = time; }
-  void addStreamApplicator(const char* streamName, const IApplicator* applicator) override;
-  void setStreamApplicators(const char* streamName, const ApplicatorList&) override;
-  const char* removeStreamApplicator(const IApplicator* applicator) override;
-  ApplicatorList removeStreamApplicators(const char* streamName) override;
+  void addStreamApplicator(const String& streamName, IApplicator* applicator) override;
+  void setStreamApplicators(const String& streamName, const ApplicatorList&) override;
+  String removeStreamApplicator(IApplicator* applicator) override;
+  ApplicatorList removeStreamApplicators(const String& streamName) override;
   void update(time_t deltaTime) override;
   void reset() override;
   
 protected:
   struct StreamContext {
-    StreamContext(const char* _name) 
+    StreamContext(const String& _name) 
       : name(_name)
       , currentNode(nullptr)
     {}
-    const char* name;
-    ForwardLinkedList<const INode*>::node_t* currentNode;
-    ForwardLinkedList<const IApplicator*> applicators;
+    String name;
+    const BidirectionalLinkedList<const INode*>::node_t* currentNode;
+    ForwardLinkedList<IApplicator*> applicators;
   };
   
-  struct StreamContext* getStreamContext(const char* streamName);
+  struct StreamContext* getStreamContext(const String& streamName);
   
 private:
   ForwardLinkedList<struct StreamContext*> mStreamContextList;
