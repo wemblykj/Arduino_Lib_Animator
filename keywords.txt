@@ -6,14 +6,14 @@
 # Class (KEYWORD1)
 #######################################
 
-IAnimation	                KEYWORD1
-IApplicator	                KEYWORD1
-IController	                KEYWORD1
-IInterpolatingApplicator	  KEYWORD1
-IKeyframeApplicator	        KEYWORD1
-INode         	            KEYWORD1
-IPlaybackControls           KEYWORD1
-IStream                     KEYWORD1
+IAnimation	KEYWORD1
+IApplicator	KEYWORD1
+IController	KEYWORD1
+IInterpolatingApplicator	KEYWORD1
+IKeyframeApplicator	KEYWORD1
+INode	KEYWORD1
+IPlaybackControls	KEYWORD1
+IStream	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -29,7 +29,7 @@ reset	KEYWORD2
 #setIntensity	KEYWORD2
 
 # IRGBController interface
-#apply	  KEYWORD2
+#apply	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
